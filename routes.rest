@@ -1,0 +1,36 @@
+###
+
+// create user
+POST http://localhost:8000/api/v1/create-user
+Content-Type: application/json
+
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "middle_name": "Smith",
+  "gender": "male",
+  "email_address": "smth@gmail.com",
+  "phone_number": "+123456789",
+  "roles": ["student"]
+}
+
+###
+
+GET http://localhost:8000/api/v1/read-all-users
+
+###
+
+GET http://localhost:8000/api/v1/read-user/smth@gmail.com
+
+
+###
+PUT http://localhost:8000/api/v1/update-user/smth@gmail.com
+Content-Type: application/json
+
+{
+    "other_names": ["James"],
+    "age": 13
+}
+
+###
+DELETE http://localhost:8000/api/v1/delete-user/smth@gmail.com

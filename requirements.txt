@@ -1,0 +1,7 @@
+python-dotenv
+certifi
+pymongo
+fastapi
+uvicorn[standard]
+motor
+fastapi[standard]

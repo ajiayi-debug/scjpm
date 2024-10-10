@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import os
 from starlette.middleware.cors import CORSMiddleware
 import pandas as pd
-import re
+import tqdm
 load_dotenv()
 
 MONGO_URI=os.getenv('uri_mongo')

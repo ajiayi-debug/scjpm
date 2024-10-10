@@ -1,5 +1,5 @@
 # import fast api
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from models import User # import the user model defined by us
 # imports for the MongoDB database connection
@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 import os
 from starlette.middleware.cors import CORSMiddleware
 import pandas as pd
-import tqdm
 load_dotenv()
 
 MONGO_URI=os.getenv('uri_mongo')

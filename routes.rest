@@ -1,34 +1,44 @@
 ###
 
+POST http://localhost:8000/token
+Content-Type: application/x-www-form-urlencoded
+
+username=John&password=password
+
+###
 // create user
 POST http://localhost:8000/api/v1/create-user
 Content-Type: application/json
 
 {
-  "first_name": "Johnie",
-  "last_name": "Doe",
-  "middle_name": "Smith",
+  "username": "Hey",
+  "first_name": "Doe",
+  "last_name": "H",
   "gender": "male",
-  "email_address": "smth1@gmail.com",
-  "phone_number": "+123456789",
-  "roles": ["student"]
+  "email_address": "smaath@gmail.com",
+  "phone_number": "+12345678",
+  "disabled": false,
+  "roles": ["student"],
+  "password": "password"
 }
 
 ###
 
+// token endpoint (login) returns an auth token, need to add this token in auth bearer in header
 GET http://localhost:8000/api/v1/read-all-users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIZXkiLCJleHAiOjE3Mjg1Njg3MzV9.gS8R2t17PLy2Pd0N-C5BX_7EVZXMUQa7Y30pmokX3Bs
 
 ###
 GET http://localhost:8000/api/v1/read-all-users-dataframe
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIZXkiLCJleHAiOjE3Mjg1Njg3MzV9.gS8R2t17PLy2Pd0N-C5BX_7EVZXMUQa7Y30pmokX3Bs
 ###
 
 GET http://localhost:8000/api/v1/users-csv
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIZXkiLCJleHAiOjE3Mjg1Njg3MzV9.gS8R2t17PLy2Pd0N-C5BX_7EVZXMUQa7Y30pmokX3Bs
 ###
 
 GET http://localhost:8000/api/v1/read-user/smth@gmail.com
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIZXkiLCJleHAiOjE3Mjg1Njg3MzV9.gS8R2t17PLy2Pd0N-C5BX_7EVZXMUQa7Y30pmokX3Bs
 
 ###
 PUT http://localhost:8000/api/v1/update-user/smth@gmail.com
@@ -42,3 +52,7 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/api/v1/delete-user/smth@gmail.com
+
+
+###
+

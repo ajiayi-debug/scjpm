@@ -15,11 +15,15 @@ class Role(str, Enum):
     teacher = "teacher"
 
 class User(BaseModel):
+    username: str
     first_name: str
     last_name: str
     middle_name: Optional[str] = None  # Make middle name optional
     gender: Gender
-    email_address: str
+    email_address: Optional[str] = None
     phone_number: str
-    roles: List[Role]# user can have several roles
+    disabled: Optional[bool] = None
+    roles: List[Role]
+    password: str  # Password field added
+
 

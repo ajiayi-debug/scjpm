@@ -5,3 +5,5 @@ fastapi
 uvicorn[standard]
 motor
 fastapi[standard]
+passlib[bcrypt]
+python-jose

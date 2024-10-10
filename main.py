@@ -116,7 +116,7 @@ async def read_user_by_email(email_address: str):
 
 # U <=== Update
 # Update user
-
+ 
 class UpdateUserDTO(BaseModel):
     other_names: List[str] = None
     age: int = None

@@ -22,3 +22,4 @@ class User(BaseModel):
     email_address: str
     phone_number: str
     roles: List[Role]# user can have several roles
+

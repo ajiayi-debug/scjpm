@@ -19,6 +19,13 @@ Content-Type: application/json
 GET http://localhost:8000/api/v1/read-all-users
 
 ###
+GET http://localhost:8000/api/v1/read-all-users-dataframe
+
+###
+
+GET http://localhost:8000/api/v1/users-csv
+
+###
 
 GET http://localhost:8000/api/v1/read-user/smth@gmail.com
 

@@ -1,5 +1,6 @@
 # import fast api
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from models import User # import the user model defined by us
 # imports for the MongoDB database connection
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -10,6 +11,7 @@ from pydantic import BaseModel # Most widely used data validation library for py
 from dotenv import load_dotenv
 import os
 from starlette.middleware.cors import CORSMiddleware
+import pandas as pd
 
 load_dotenv()
 
@@ -63,11 +65,45 @@ async def insert_user(user: User):
     return inserted_user
 
 # R <=== Read
-# Read all users
+# Read all users as a list of json 
 @app.get("/api/v1/read-all-users", response_model=List[User])
 async def read_users():
     users = await app.mongodb["users"].find().to_list(None)
     return users
+
+# Read all users as a dataframe (pd)
+@app.get("/api/v1/read-all-users-dataframe")
+async def get_users_dataframe():
+    # Retrieve all users from the MongoDB collection
+    users_cursor = app.mongodb["users"].find({})
+    users = await users_cursor.to_list(None)
+
+    # Convert MongoDB data to pandas DataFrame
+    users_df = pd.DataFrame(users)
+
+    # Optional: Convert ObjectId to string if present
+    if "_id" in users_df.columns:
+        users_df["_id"] = users_df["_id"].astype(str)
+
+    # Return DataFrame as a JSON-like response
+    # Optionally, you can use `to_dict(orient="records")` if you want a more structured JSON
+    return users_df.to_dict(orient="records")
+
+#Read all users as excel file
+@app.get("/api/v1/users-csv")
+async def get_users_csv():
+    users_cursor = app.mongodb["users"].find({})
+    users = await users_cursor.to_list(None)
+    users_df = pd.DataFrame(users)
+    if "_id" in users_df.columns:
+        users_df["_id"] = users_df["_id"].astype(str)
+    
+    # Save DataFrame as a CSV file
+    csv_file_path = "/tmp/users.csv"
+    users_df.to_csv(csv_file_path, index=False)
+    
+    # Return the CSV file as a response
+    return FileResponse(csv_file_path, media_type='text/csv', filename="users.csv")
 
 # Read one user by email_address
 @app.get("/api/v1/read-user/{email_address}", response_model=User)
